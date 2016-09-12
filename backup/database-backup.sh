@@ -39,4 +39,4 @@ done
 
 # Example Schedule
 # Backup Databases Daily @ 12:30 AM
-# 30 00 * * * root /etc/cron.daily/backup-databases
+# 30 00 * * * root /etc/cron.daily/database-backup

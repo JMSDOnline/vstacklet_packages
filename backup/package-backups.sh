@@ -8,10 +8,11 @@ normal=$(tput sgr0);
 OK=$(echo -e "[ ${green}DONE${normal} ]")
 OUTTO="/root/vs-backup.log"
 
+
 #verify directory structure exists prior to running this job
-PACBfiles="/backup";
+PACBfiles="/backup/directories, /backup/databases";
 # Where to backup to.
-PACDest="/";
+PACDest="/backup";
 
 # Create archive filename.
 PACDay=$(date +%b-%d-%y);
@@ -26,11 +27,10 @@ PACAfile="$PACHostname-$PACDay-$additional_code.tgz";
 
 # Backup the files using tar.
   tar -cpzf $PACDest$PACAfile $PACBfiles >>"${OUTTO}" 2>&1 &&
-  cd $PACDest
-  mv $PACHostname-$PACDay-$additional_code.tgz /backup &&
-  cd /root/vstacklet
-    echo -n "${OK}"
-    echo
+  cd /etc/vstacklet
+
+  echo -n "${OK}"
+  echo
 
 # Print end status message.
   echo >>"${OUTTO}" 2>&1;

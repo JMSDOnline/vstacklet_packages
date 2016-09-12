@@ -11,7 +11,7 @@ OUTTO="/root/vs-backup.log"
 # verify directory structure exists prior to running this job
 # if you are using the standalone, modify this according to
 # your current and/or future directory structures preferred paths
-DIRBfiles="/srv/www /etc /root";
+DIRBfiles="/srv/www";
 
 # Where to backup to.
 DIRDest="/backup/directories/";
@@ -44,4 +44,4 @@ DIRAfile="$DIRHostname-$DIRDay.tgz";
 
 # Example Schedule
 # Backup Website Files Daily @ 12:45 AM
-# 45 00 * * * root /etc/cron.daily/backup-website-files
+# 45 00 * * * root /etc/cron.daily/directory-backup

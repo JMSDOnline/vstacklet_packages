@@ -27,7 +27,7 @@ function _askdirectories() {
 
 function _directories() {
   if [[ ${directories} == "yes" ]]; then
-  DIR="vstacklet"
+  DIR="/etc/vstacklet/packages/backup"
     if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
     . "$DIR/files-backup.sh";
   fi
@@ -44,20 +44,20 @@ function _askdatabase() {
 
 function _database() {
   if [[ ${database} == "yes" ]]; then
-  DIR="vstacklet"
+  DIR="/etc/vstacklet/packages/backup"
     if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
     . "$DIR/database-backup.sh";
   fi
 }
 
 function _package() {
-  DIR="vstacklet"
+  DIR="/etc/vstacklet/packages/backup"
     if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
     . "$DIR/package-backups.sh";
 }
 
 function _clean() {
-  DIR="vstacklet"
+  DIR="/etc/vstacklet/packages/backup"
     if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
     . "$DIR/backup-cleanup.sh";
     echo "${OK}"
