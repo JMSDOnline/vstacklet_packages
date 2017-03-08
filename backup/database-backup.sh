@@ -1,7 +1,12 @@
 #!/bin/bash
 #start
 #-----------------------------------------------------------------------
+
+#ensure the directories needed exist
+mkdir -p /tmp/vstacklet /tmp/vstacklet/backup/{directories,databases} 2>&1;
+
 #verify directory structure exists prior to running this job
+TMPBackUpDIR="/tmp/vstacklet/backup/databases/";
 BackUpDIR="/backup/databases/";
 DateStamp=$(date +%b-%d-%y);
 
@@ -18,12 +23,16 @@ DBPwd="dbpasswd";
 
 for DB in $DBList;
 do
-mysqldump --opt -u$DBUser -p$DBPwd --add-drop-table --lock-tables --databases $DB > $BackUpDIR$DateStamp.$DB.sql;
-  tar zcf "$BackUpDIR$DateStamp.DB.$DB.tar.gz" -P $BackUpDIR$DateStamp.$DB.sql;
-  rm -rf $BackUpDIR$DateStamp.$DB.sql;
-  mysqldump --opt -u$DBUser -p$DBPwd --add-drop-table --lock-tables $DB > $BackUpDIR$DateStamp.$DB.tbls.sql;
-  tar zcf "$BackUpDIR$DateStamp.DB.$DB.tbls.tar.gz" -P $BackUpDIR$DateStamp.$DB.tbls.sql;
-  rm -rf $BackUpDIR$DateStamp.$DB.tbls.sql;
+mysqldump --opt -u$DBUser -p$DBPwd --add-drop-table --lock-tables --databases $DB > $TMPBackUpDIR$DateStamp.$DB.sql;
+  tar zcf "$TMPBackUpDIR$DateStamp.DB.$DB.tar.gz" -P $TMPBackUpDIR$DateStamp.$DB.sql;
+  rm -rf $TMPBackUpDIR$DateStamp.$DB.sql;
+
+  mysqldump --opt -u$DBUser -p$DBPwd --add-drop-table --lock-tables $DB > $TMPBackUpDIR$DateStamp.$DB.tbls.sql;
+  tar zcf "$TMPBackUpDIR$DateStamp.DB.$DB.tbls.tar.gz" -P $TMPBackUpDIR$DateStamp.$DB.tbls.sql;
+  rm -rf $TMPBackUpDIR$DateStamp.$DB.tbls.sql;
+
+  mv -f $TMPBackUpDIR$DateStamp.DB.$DB.tar.gz $BackUpDIR$DateStamp.DB.$DB.tar.gz
+  mv -f $TMPBackUpDIR$DateStamp.DB.$DB.tbls.tar.gz $BackUpDIR$DateStamp.DB.$DB.tbls.tar.gz
 done
 
 # This gets pushed to the vs-backup command

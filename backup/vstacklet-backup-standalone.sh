@@ -42,6 +42,7 @@ EOF
 
 # Create vstacklet & backup directory strucutre
 mkdir -p /etc/vstacklet /backup/{directories,databases}
+mkdir -p /tmp/vstacklet /tmp/vstacklet/backup/{directories,databases}
 
 # Download the needed scripts for VStacklet
 git clone https://github.com/JMSDOnline/vstacklet_packages.git /etc/vstacklet >/dev/null 2>&1;

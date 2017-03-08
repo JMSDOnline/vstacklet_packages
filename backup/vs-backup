@@ -29,7 +29,7 @@ function _directories() {
   if [[ ${directories} == "yes" ]]; then
   DIR="/etc/vstacklet/packages/backup"
     if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
-    . "$DIR/files-backup.sh";
+    . "$DIR/directory-backup.sh";
   fi
 }
 

@@ -8,12 +8,16 @@ normal=$(tput sgr0);
 OK=$(echo -e "[ ${green}DONE${normal} ]")
 OUTTO="/root/vs-backup.log"
 
+#ensure the directories needed exist
+mkdir -p /tmp/vstacklet /tmp/vstacklet/backup/{directories,databases} 2>&1;
+
 # verify directory structure exists prior to running this job
 # if you are using the standalone, modify this according to
 # your current and/or future directory structures preferred paths
 DIRBfiles="/srv/www";
 
 # Where to backup to.
+TMPDIRDest="/tmp/vstacklet/backup/directories/";
 DIRDest="/backup/directories/";
 
 # Create archive filename.
@@ -27,7 +31,8 @@ DIRAfile="$DIRHostname-$DIRDay.tgz";
   echo >>"${OUTTO}" 2>&1;
 
 # Backup the files using tar.
-  tar -cpzf $DIRDest$DIRAfile $DIRBfiles >>"${OUTTO}" 2>&1 &&
+  tar zcf $TMPDIRDest$DIRAfile $DIRBfiles;
+  mv -f $TMPDIRDest$DIRAfile $DIRDest$DIRAfile >>"${OUTTO}" 2>&1
     echo -n "${OK}"
     echo
 
