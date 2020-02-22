@@ -1,8 +1,8 @@
 #!/bin/bash
 #start
 #-----------------------------------------------------------------------
-find /backup/databases/ -name '*.gz' | xargs rm -f;
-find /backup/directories/ -name '*.tgz' | xargs rm -f;
+find /backup/databases/ -name '*.gz' -mtime +3 | xargs rm -f;
+find /backup/directories/ -name '*.tgz' -mtime +3 | xargs rm -f;
 # Are Weekly Backups Implemented?
 # find /backup/weekly/ -name '*.gz' -mtime +30 | xargs rm -f;
 #-----------------------------------------------------------------------
