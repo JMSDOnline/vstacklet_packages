@@ -50,9 +50,14 @@ cd /etc/vstacklet/vstacklet_packages/backup
 
 # Convert all shell scripts to executable
 chmod +x *.sh
+chmod +x vs-backup
 
 # Move `vs-backup` executable to /usr/local/bin for system execution
-mv vs-backup /usr/local/bin
+if [[ -f /etc/vstacklet/packages/backup/vs-backup ]]; then
+  ln -sf /etc/vstacklet/packages/backup/vs-backup /usr/local/bin/vs-backup
+  else
+  ln -s /etc/vstacklet/packages/backup/vs-backup /usr/local/bin/vs-backup
+fi
 
 ###############################################################################
 echo
