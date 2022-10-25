@@ -8,11 +8,11 @@
 #
 
 #Script Console Colors
-normal=$(tput sgr0);
-underline=$(tput smul);
+normal=$(tput sgr0)
+underline=$(tput smul)
 
-sub_title=${bold}${yellow};
-repo_title=${black}${on_green};
+sub_title=${bold}${yellow}
+repo_title=${black}${on_green}
 
 PROGNAME=${0##*/}
 VERSION="0.1"
@@ -45,8 +45,8 @@ mkdir -p /etc/vstacklet /backup/{directories,databases}
 mkdir -p /tmp/vstacklet /tmp/vstacklet/backup/{directories,databases}
 
 # Download the needed scripts for VStacklet
-git clone https://github.com/JMSDOnline/vstacklet_packages.git /etc/vstacklet >/dev/null 2>&1;
-cd /etc/vstacklet/vstacklet_packages/backup
+git clone https://github.com/JMSDOnline/vstacklet_packages.git /etc/vstacklet >/dev/null 2>&1
+cd /etc/vstacklet/packages/backup
 
 # Convert all shell scripts to executable
 chmod +x *.sh
@@ -55,18 +55,18 @@ chmod +x vs-backup
 # Move `vs-backup` executable to /usr/local/bin for system execution
 if [[ -f /etc/vstacklet/packages/backup/vs-backup ]]; then
   ln -sf /etc/vstacklet/packages/backup/vs-backup /usr/local/bin/vs-backup
-  else
+else
   ln -s /etc/vstacklet/packages/backup/vs-backup /usr/local/bin/vs-backup
 fi
 
 ###############################################################################
 echo
 echo
-echo "VS-Backup is now installed. Please make the needed changes in";
-echo "the required files.";
+echo "VS-Backup is now installed. Please make the needed changes in"
+echo "the required files."
 echo
-echo "Once changes are perform, you can run the script by simply typing:";
-echo "${bold}${green}vs-backup${normal}";
+echo "Once changes are perform, you can run the script by simply typing:"
+echo "${bold}${green}vs-backup${normal}"
 echo
 echo
 ###############################################################################
